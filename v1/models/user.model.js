@@ -9,6 +9,16 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  otp : {
+    type: String,
+  },
+  otpUsed : {
+    type: Boolean,
+    default: false,
+  },
+  otpTime : {
+    type: Date,
+  },
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,

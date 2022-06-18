@@ -6,10 +6,10 @@ const userController = require("../controllers/user.controller");
 const router = express.Router();
 
 router.post(
-  "/signup",
+  "/auth",
   body("email").isEmail(),
   bodyValidator,
-  userController.signup
+  userController.auth
 );
 
 module.exports = router;
