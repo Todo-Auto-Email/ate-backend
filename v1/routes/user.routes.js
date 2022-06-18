@@ -12,4 +12,12 @@ router.post(
   userController.auth
 );
 
+router.post(
+  "/verify",
+  body("email").isEmail(),
+  body("otp").isString(),
+  bodyValidator,
+  userController.verify
+);
+
 module.exports = router;
