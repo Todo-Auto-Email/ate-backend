@@ -1,5 +1,6 @@
 const express = require("express");
 const { body } = require("express-validator");
+const { protect, adminProtect } = require("../../middlewares/auth");
 const { bodyValidator } = require("../../middlewares/errors");
 const userController = require("../controllers/user.controller");
 
@@ -19,5 +20,9 @@ router.post(
   bodyValidator,
   userController.verify
 );
+
+router.get("/checkUser", protect, userController.check);
+
+router.get("/checkAdmin", adminProtect, userController.check);
 
 module.exports = router;

@@ -49,11 +49,18 @@ const verify = async_handler(async (req, res) => {
   token = encrypt({ id: user._id });
   return res.json({
     status: "success",
-    token: token
+    token: token,
   });
 });
+
+const check = (req, res) => {
+  return res.json({
+    status: "success",
+  });
+};
 
 module.exports = {
   auth,
   verify,
+  check
 };
