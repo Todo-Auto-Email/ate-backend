@@ -25,6 +25,10 @@ const UserSchema = mongoose.Schema({
       ref: "Event",
     },
   ],
+  isAdmin : {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const UserModel = mongoose.model("User", UserSchema);
