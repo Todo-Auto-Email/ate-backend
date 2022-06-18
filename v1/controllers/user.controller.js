@@ -9,7 +9,7 @@ const auth = async_handler(async (req, res) => {
   const { email } = req.body;
   let user = await UserModel.findOne({ email });
   if (!user) {
-    user = await UserModel({ email });
+    user = UserModel({ email });
   }
 
   const otp = emailOtp();
