@@ -37,7 +37,13 @@ const verify = async_handler(async (req, res) => {
   ) {
     return res.status(401).json({
       status: "error",
-      message: "Invalid OTP",
+      errors: [
+        {
+          msg: "Invalid OTP",
+          param: "otp",
+          location: "body",
+        },
+      ],
     });
   }
 
@@ -62,5 +68,5 @@ const check = (req, res) => {
 module.exports = {
   auth,
   verify,
-  check
+  check,
 };
