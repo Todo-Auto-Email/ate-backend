@@ -13,6 +13,14 @@ app.get('/', (req, res) => {
     res.send('Server API is running');
 });
 
+const v1routes = require("./v1/v1.routes");
+const { notFound, errorHandler } = require("./middlewares/errors");
+
+app.use("/api/v1", v1routes);
+
+app.use(notFound);
+app.use(errorHandler);
+
 const PORT = process.env.PORT || 5000;
 
 const main = async() => {
