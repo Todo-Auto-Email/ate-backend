@@ -59,7 +59,7 @@ const sendUpdates = async () => {
 };
 
 const scheduler = () => {
-  cron.schedule("* */12 * * *", async () => {
+  cron.schedule("0 0 */12 * * *", async () => {
     console.log("Sending updates : ", new Date());
     await sendUpdates();
   });
