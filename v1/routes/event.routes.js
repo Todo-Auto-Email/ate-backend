@@ -18,7 +18,7 @@ router.post(
 
 router.post(
   "/subscribe",
-  protect,
+  adminProtect,
   body("event").isString(),
   bodyValidator,
   eventControllers.subscribe
