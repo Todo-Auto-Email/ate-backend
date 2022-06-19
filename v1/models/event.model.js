@@ -13,6 +13,10 @@ const EventSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
+  subCount : {
+    type: Number,
+    default: 0,
+  }
 });
 
 const EventModel = mongoose.model("Event", EventSchema);

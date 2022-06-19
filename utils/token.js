@@ -15,6 +15,7 @@ const decrypt = (token) => {
   } catch (error) {
     return {
       success: false,
+      data: null
     };
   }
 };

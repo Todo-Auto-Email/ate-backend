@@ -9,7 +9,7 @@ const auth = async_handler(async (req, res) => {
   const { email } = req.body;
   let user = await UserModel.findOne({ email });
   if (!user) {
-    user = await UserModel({ email });
+    user = UserModel({ email });
   }
 
   const otp = emailOtp();
@@ -37,7 +37,13 @@ const verify = async_handler(async (req, res) => {
   ) {
     return res.status(401).json({
       status: "error",
-      message: "Invalid OTP",
+      errors: [
+        {
+          msg: "Invalid OTP",
+          param: "otp",
+          location: "body",
+        },
+      ],
     });
   }
 
@@ -49,11 +55,18 @@ const verify = async_handler(async (req, res) => {
   token = encrypt({ id: user._id });
   return res.json({
     status: "success",
-    token: token
+    token: token,
   });
 });
+
+const check = (req, res) => {
+  return res.json({
+    status: "success",
+  });
+};
 
 module.exports = {
   auth,
   verify,
+  check,
 };
