@@ -1,4 +1,4 @@
-const { UserModel } = require("../v1/models/user.model");
+const { UserModel } = require("../v2/models/user.model");
 const async_handler = require("express-async-handler");
 const { decrypt } = require("../utils/token");
 

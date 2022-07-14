@@ -13,17 +13,18 @@ app.get('/', (req, res) => {
     res.send('Server API is running');
 });
 
-const v1routes = require("./v1/v1.routes");
+// const v1routes = require("./v1/v1.routes");
+// app.use("/api/v1", v1routes);
+
+const v2routes = require("./v2/v2.routes");
+app.use("/api/v2", v2routes);
+
 const { notFound, errorHandler } = require("./middlewares/errors");
-
-const jobs = require("./jobs");
-
-app.use("/api/v1", v1routes);
-
 app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
+const jobs = require("./jobs");
 
 const main = async() => {
     await connectDb();

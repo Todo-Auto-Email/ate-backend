@@ -1,6 +1,6 @@
 const cron = require("node-cron");
 const { sendMail } = require("./utils/email");
-const { UserModel } = require("./v1/models/user.model");
+const { UserModel } = require("./v2/models/user.model");
 
 const sendUpdates = async () => {
   try {

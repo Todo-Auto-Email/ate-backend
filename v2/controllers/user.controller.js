@@ -9,7 +9,16 @@ const auth = async_handler(async (req, res) => {
   const { email } = req.body;
   let user = await UserModel.findOne({ email });
   if (!user) {
-    user = UserModel({ email });
+    return res.status(401).json({
+      status: "error",
+      errors: [
+        {
+          msg: "User not found",
+          param: "email",
+          location: "body",
+        },
+      ],
+    });
   }
 
   const otp = emailOtp();
