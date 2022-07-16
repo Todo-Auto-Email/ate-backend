@@ -1,5 +1,6 @@
 const async_handler = require("express-async-handler");
 const { UserModel } = require("../models/user.model");
+const { WaitUserModel } = require("../models/waituser.model");
 const { sendOtp } = require("../../utils/email");
 const { encrypt } = require("../../utils/token");
 const { emailOtp } = require("../../utils/randoms");
@@ -9,11 +10,25 @@ const auth = async_handler(async (req, res) => {
   const { email } = req.body;
   let user = await UserModel.findOne({ email });
   if (!user) {
+    user = await WaitUserModel.findOne({ email });
+    if(!user) {
+      return res.status(401).json({
+        status: "error",
+        errors: [
+          {
+            msg: "User not found. Please join waitlist to get access.",
+            param: "email",
+            location: "body",
+          },
+        ],
+      });
+    }
+
     return res.status(401).json({
       status: "error",
       errors: [
         {
-          msg: "User not found",
+          msg: "User not found. Please wait for admin to verify your waitlist request.",
           param: "email",
           location: "body",
         },

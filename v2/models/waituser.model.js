@@ -11,7 +11,7 @@ const WaitUserSchema = mongoose.Schema({
   },
 });
 
-const WaitUserModel = mongoose.model("User", WaitUserSchema);
+const WaitUserModel = mongoose.model("WaitUser", WaitUserSchema);
 
 module.exports = {
   WaitUserModel,
