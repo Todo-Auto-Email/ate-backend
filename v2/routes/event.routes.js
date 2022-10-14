@@ -32,4 +32,12 @@ router.post(
   eventControllers.unsubscribe
 );
 
+router.post(
+  "/getMyEventsByMail",
+  protect,
+  body("event").isString(),
+  bodyValidator,
+  eventControllers.getUserEventsByMail
+);
+
 module.exports = router;
