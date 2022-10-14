@@ -1,4 +1,5 @@
 const async_handler = require("express-async-handler");
+const { sendUpdates } = require("../../jobs");
 const { sendMail } = require("../../utils/email");
 const { EventModel } = require("../models/event.model");
 
@@ -197,9 +198,45 @@ const getUserEventsByMail = async () => {
   })
 };
 
+const getUserEvents = async () => {
+  const { events } = req.user;
+  if (events.length > 0) {
+    const eventsToSend = events.filter((event) => {
+      const now = new Date();
+      const eventDate = new Date(event.timestamp);
+      return eventDate > now;
+    });
+    if (eventsToSend.length > 0) {
+      eventsToSend.sort((a, b) => {
+        const aDate = new Date(a.timestamp);
+        const bDate = new Date(b.timestamp);
+        return aDate - bDate;
+      });
+    }
+    return res.json({
+      success: true,
+      events: eventsToSend
+    })
+  }
+  return res.json({
+    success: true,
+    message: "No events subscribed"
+  })
+};
+
+const sendAllMails = async () => {
+  await sendUpdates();
+  return res.json({
+    success : true, 
+    message : "Sent all mails successfully"
+  })
+}
+
 module.exports = {
   createEvent,
   subscribe,
   unsubscribe,
   getUserEventsByMail,
+  getUserEvents,
+  sendAllMails
 };

@@ -65,4 +65,7 @@ const scheduler = () => {
   });
 };
 
-module.exports = scheduler;
+module.exports = {
+  scheduler,
+  sendUpdates
+};

@@ -24,12 +24,12 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-// const jobs = require("./jobs");
+// const {scheduler} = require("./jobs");
 
 const main = async() => {
     await connectDb();
     app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV||"development"} mode on port ${PORT}...`.yellow.bold));
-    // jobs();
+    // scheduler();
 };
 
 main();
