@@ -35,9 +35,22 @@ router.post(
 router.post(
   "/getMyEventsByMail",
   protect,
-  body("event").isString(),
   bodyValidator,
   eventControllers.getUserEventsByMail
+);
+
+router.post(
+  "/getMyEvents",
+  protect,
+  bodyValidator,
+  eventControllers.getUserEvents
+);
+
+router.post(
+  "/sendAllMails",
+  adminProtect,
+  bodyValidator,
+  eventControllers.sendAllMails
 );
 
 module.exports = router;
